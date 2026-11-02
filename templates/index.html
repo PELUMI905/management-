@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management System</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <section id="login-screen" class="login-screen">
+    <div class="login-card">
+      <div class="brand login-brand"><span class="brand-icon">S</span><div><b>Student Hub</b><small>Management System</small></div></div>
+      <p class="eyebrow">STAFF PORTAL</p>
+      <h1>Welcome back</h1>
+      <p class="sub">Turst.Built.</p>
+      <form id="login-form" class="login-form">
+        <label>Username<input id="username" name="username" required autocomplete="username"></label>
+        <label>Password<input id="password" name="password" type="password" required autocomplete="current-password"></label>
+        <button class="btn btn-primary" type="submit">Sign in</button>
+      </form>
+      <p id="login-status" class="message" role="status"></p>
+      <small class="login-note">Staff accounts are created securely by the system administrator.</small>
+    </div>
+  </section>
+  <div id="app-shell" class="hidden">
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-icon">S</span><div><b>Student Hub</b><small>Management System</small></div></div>
+    <nav>
+      <button class="nav-link active" data-view="dashboard">▦ &nbsp; Dashboard</button>
+      <button class="nav-link" data-view="students">♙ &nbsp; Students</button>
+      <button class="nav-link" data-view="classes">▤ &nbsp; Classes</button>
+      <button class="nav-link" data-view="results">▣ &nbsp; Results</button>
+    </nav>
+    <div class="sidebar-bottom"><div class="avatar">SM</div><div><b>School Admin</b><small>Staff access required to edit</small></div></div>
+  </aside>
+  <main class="main">
+    <header><div><p class="eyebrow">SCHOOL OVERVIEW</p><h1 id="page-title">Dashboard</h1><p class="sub">Manage students, classes and academic performance.</p></div>
+      <div class="header-actions"><button class="btn btn-light" id="logout">Sign out</button><button class="btn btn-primary" id="quick-add">＋ Add student</button></div>
+    </header>
+    <div id="notice" class="notice hidden" role="status"></div>
+    <section id="record-panel" class="panel hidden" aria-live="polite">
+      <div class="panel-heading"><div><h2 id="dialog-title">Add record</h2><p id="dialog-description">Enter the details below.</p></div><button type="button" class="icon-btn" id="dialog-close" aria-label="Close form">×</button></div>
+      <form id="record-form"><div id="form-fields" class="form-grid"></div><p id="form-error" class="error-text"></p><div class="dialog-actions"><button type="button" class="btn btn-light" id="cancel-record">Cancel</button><button type="submit" class="btn btn-primary">Save record</button></div></form>
+    </section>
+    <section id="dashboard-view" class="view">
+      <div class="stats">
+        <article class="stat-card"><div class="stat-top"><span>Total students</span><span class="stat-icon blue">♙</span></div><strong id="total-students">—</strong><small>Registered learners</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Total classes</span><span class="stat-icon purple">▤</span></div><strong id="total-classes">—</strong><small>Active classrooms</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Recorded results</span><span class="stat-icon orange">▣</span></div><strong id="total-results">—</strong><small>Academic records</small></article>
+        <article class="stat-card"><div class="stat-top"><span>Average score</span><span class="stat-icon green">↗</span></div><strong id="average-score">—</strong><small>Across all results</small></article>
+      </div>
+      <div class="grid-two">
+        <section class="panel"><div class="panel-heading"><div><h2>Students per class</h2><p>Current classroom enrolment</p></div></div><div id="class-stats" class="class-stats"><p class="muted">Loading class data…</p></div></section>
+        <section class="panel"><div class="panel-heading"><div><h2>Recently registered</h2><p>The latest five students</p></div><button class="text-btn" data-goto="students">View all</button></div><div id="recent-students" class="recent-list"></div></section>
+      </div>
+    </section>
+    <section id="students-view" class="view hidden"><section class="panel"><div class="panel-heading"><div><h2>Students</h2><p>Search, filter and manage student records.</p></div><button class="btn btn-primary staff-only" id="add-student">＋ Add student</button></div>
+      <div class="toolbar"><input id="student-search" placeholder="Search name, email or admission no."><select id="student-gender"><option value="">All genders</option><option value="M">Male</option><option value="F">Female</option><option value="P">Prefer not to say</option></select><select id="student-class"><option value="">All classes</option></select><button class="btn btn-light" id="student-filter">Apply</button></div>
+      <div class="table-wrap"><table><thead><tr><th>Student</th><th>Admission no.</th><th>Class</th><th>Gender</th><th>Registered</th><th>Actions</th></tr></thead><tbody id="students-table"></tbody></table></div><div class="pagination"><button id="student-prev" class="btn btn-light">Previous</button><span id="student-page">Page 1</span><button id="student-next" class="btn btn-light">Next</button></div>
+    </section></section>
+    <section id="classes-view" class="view hidden"><section class="panel"><div class="panel-heading"><div><h2>Classes</h2><p>Classroom list and enrolment totals.</p></div><button class="btn btn-primary staff-only" id="add-class">＋ Add class</button></div><div id="classes-list" class="class-grid"></div></section></section>
+    <section id="results-view" class="view hidden"><section class="panel"><div class="panel-heading"><div><h2>Academic results</h2><p>CA and exam scores, calculated totals and grades.</p></div><button class="btn btn-primary staff-only" id="add-result">＋ Record result</button></div>
+      <div class="toolbar"><input id="result-search" placeholder="Search subject or student"><select id="result-term"><option value="">All terms</option><option>First</option><option>Second</option><option>Third</option></select><input id="result-session" placeholder="Session e.g. 2026/2027"><button class="btn btn-light" id="result-filter">Apply</button></div>
+      <div class="table-wrap"><table><thead><tr><th>Student</th><th>Class</th><th>Subject</th><th>Term / Session</th><th>CA</th><th>Exam</th><th>Total</th><th>Grade</th><th>Actions</th></tr></thead><tbody id="results-table"></tbody></table></div></section></section>
+    <footer>Student Management System <span>Built by CodeTitan</span></footer>
+  </main>
+  </div>
+  <script src="/static/app.js"></script>
+</body></html>

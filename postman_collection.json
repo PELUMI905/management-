@@ -1,0 +1,18 @@
+{
+  "info": {
+    "name": "Student Management System API",
+    "description": "API requests for the Django REST Framework Student Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{"key": "base_url", "value": "http://127.0.0.1:8000"}],
+  "item": [
+    {"name": "Dashboard", "request": {"method": "GET", "url": "{{base_url}}/api/dashboard/"}},
+    {"name": "List students", "request": {"method": "GET", "url": "{{base_url}}/api/students/"}},
+    {"name": "Search students", "request": {"method": "GET", "url": "{{base_url}}/api/students/?search=Ada"}},
+    {"name": "Create student", "request": {"method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": {"mode":"raw","raw":"{\n  \"first_name\": \"Ada\",\n  \"last_name\": \"Okafor\",\n  \"email\": \"ada@example.com\",\n  \"phone_number\": \"08012345678\",\n  \"gender\": \"F\",\n  \"date_of_birth\": \"2010-04-15\",\n  \"admission_number\": \"STU001\",\n  \"classroom\": 1\n}"},"url":"{{base_url}}/api/students/"}},
+    {"name": "List classes", "request": {"method": "GET", "url": "{{base_url}}/api/classes/"}},
+    {"name": "Create class", "request": {"method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": {"mode":"raw","raw":"{\n  \"name\": \"JSS 1A\",\n  \"level\": \"JSS 1\",\n  \"teacher_name\": \"Mrs A\",\n  \"description\": \"Junior secondary class\"\n}"},"url":"{{base_url}}/api/classes/"}},
+    {"name": "List results", "request": {"method": "GET", "url": "{{base_url}}/api/results/"}},
+    {"name": "Create result", "request": {"method": "POST", "header": [{"key":"Content-Type","value":"application/json"}], "body": {"mode":"raw","raw":"{\n  \"student\": 1,\n  \"subject\": \"Mathematics\",\n  \"term\": \"First\",\n  \"session\": \"2026/2027\",\n  \"ca_score\": 32,\n  \"exam_score\": 48\n}"},"url":"{{base_url}}/api/results/"}}
+  ]
+}
